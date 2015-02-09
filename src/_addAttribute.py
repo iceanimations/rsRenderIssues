@@ -26,8 +26,11 @@ def _select():
     if sgs:
         pc.select(list(sgs), ne=True)
         #pc.inViewMessage(amg='<hl>SG nodes selected (%s)</hl>'%str(len(sgs)), pos='midCenter', fade=True )
+    return True
 
 def _addAttr():
+    if not _select():
+        return
     sgs = pc.ls(sl=True, type='shadingEngine')
     if not sgs:
         pc.inViewMessage(amg='<hl>No SG node selected in the scene', pos='midCenter', fade=True )
