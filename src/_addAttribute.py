@@ -16,7 +16,11 @@ for sg in pc.ls(type=pc.nt.ShadingEngine):
 '''
 
 def _addAttr():
-    for node in pc.ls(sl=True):
+    sgs = pc.ls(sl=True, type='shadingEngine')
+    if not sgs:
+        pc.inViewMessage(amg='<hl>No SG node selected in the scene', pos='midCenter', fade=True )
+        return
+    for node in sgs:
         objects = pc.sets(node, q=True)
         objects = [obj.name() for obj in objects]
         try:
@@ -28,3 +32,5 @@ def _addAttr():
 
     if not 'ICE_SG_SOLVER' in [script.name() for script in pc.ls(type='script')]:
         pc.scriptNode(n='ICE_SG_SOLVER', st=1, bs=_script, stp='python')
+        
+    pc.inViewMessage(amg='<hl>SG nodes setup ready (%s)</hl>'%str(len(sgs)), pos='midCenter', fade=True )
