@@ -5,6 +5,7 @@ Created on Feb 9, 2015
 '''
 import pymel.core as pc
 nt = pc.nt
+import appUsageApp
 
 _script = '''
 import pymel.core as pc
@@ -49,3 +50,5 @@ def _addAttr():
         pc.scriptNode(n='ICE_SG_SOLVER', st=1, bs=_script, stp='python')
         
     pc.inViewMessage(amg='<hl>SG nodes setup ready (%s)</hl>'%str(len(sgs)), pos='midCenter', fade=True )
+    
+    appUsageApp.updateDatabase('setupSGNodes')
